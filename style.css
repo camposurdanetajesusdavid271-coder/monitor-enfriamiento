@@ -38,88 +38,114 @@ body { margin: 0; background: var(--bg); color: #e0e0e0; font-family: 'Segoe UI'
 @keyframes achIn { from { transform: translateX(120%); } to { transform: translateX(0); } }
 @keyframes achOut { from { transform: translateX(0); } to { transform: translateX(150%); } }
 
-/* INTERFAZ MÓVIL OPTIMIZADA (Sustituir este bloque) */
+/* INTERFAZ MÓVIL PROFESIONAL COMPACTA */
 @media (max-width: 768px) {
     body {
-        overflow-y: auto !important; /* Permitir scroll fluido */
-        height: auto;
+        overflow: hidden; /* Evita el rebote de la página completa */
+        height: 100vh;
+        background: #0a0a0a;
     }
 
     .dashboard-wrapper {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        padding: 10px;
-        height: auto;
+        height: 100vh;
+        padding: 8px;
+        gap: 8px;
+        overflow: hidden;
     }
 
-    /* Orden de importancia: 1. Monitor, 2. Controles, 3. Logs, 4. Historial */
-    .panel-main { order: 1; }
-    .capture-box { order: 2; }
-    .panel-emergency { order: 3; height: 350px; }
-    .panel-history { order: 4; height: 350px; }
-
-    /* Ajuste de tarjetas principales */
-    .card {
-        padding: 20px;
-        margin-bottom: 5px;
-        border-radius: 8px;
+    /* 1. Header ultra compacto */
+    .main-header h1 {
+        font-size: 0.9rem;
+        margin: 0;
+        padding: 5px;
+        letter-spacing: 1px;
     }
 
-    /* Sección del Número y Gráfica */
+    /* 2. Área de monitoreo (Lo más importante arriba) */
+    .panel-main {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+        overflow: hidden;
+    }
+
+    /* Contenedor del número y gráfico fijo */
     .result-zone {
         flex-direction: column !important;
-        text-align: center;
+        padding: 10px !important;
+        background: #111;
+        border: 1px solid #222;
     }
 
-    .big-number h2 {
-        font-size: 4rem !important; /* El tiempo es lo más importante */
-        margin: 10px 0;
+    .result-zone h2 {
+        font-size: 2.8rem !important;
+        margin: 0;
+        line-height: 1;
     }
 
     .chart-box {
-        height: 220px !important;
-        margin-top: 15px;
+        height: 160px !important; /* Altura fija para que no empuje nada */
+        width: 100%;
     }
 
-    /* Reorganizar configuración de hardware */
+    /* 3. Controles comprimidos */
     .control-grid {
-        grid-template-columns: 1fr; /* Todo a una columna */
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .card {
+        padding: 10px !important;
+        margin: 0;
     }
 
     .hardware-box {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
+        flex-direction: row; /* Volvemos a horizontal para ahorrar espacio vertical */
+        justify-content: space-between;
     }
 
-    .mini-chart-area {
-        width: 100%;
-        height: 100px;
-        border-radius: 4px;
+    .hardware-controls { flex: 2; }
+    .mini-chart-area { flex: 1; height: 60px; }
+
+    .input-gris {
+        padding: 6px;
+        font-size: 0.85rem;
     }
 
-    /* Botones más grandes para dedos (Touch Friendly) */
+    /* Botones en una sola línea para no ocupar espacio */
     .button-group {
-        grid-template-columns: 1fr; /* Botones uno sobre otro */
-        gap: 10px;
+        display: grid;
+        grid-template-columns: 1.5fr 0.5fr;
+        gap: 8px;
     }
 
     .btn-execute, .btn-report {
-        padding: 18px; /* Más fáciles de tocar */
-        font-size: 1rem;
-        border-radius: 6px;
-    }
-
-    /* Ajuste de cabeceras */
-    .main-header h1 {
-        font-size: 1.1rem;
-        text-align: center;
-        margin-bottom: 5px;
-    }
-
-    .panel-header h3 {
+        padding: 12px;
         font-size: 0.9rem;
+    }
+
+    /* 4. Logs e Historial (Scroll interno independiente) */
+    .panel-emergency, .panel-history {
+        height: 120px; /* Tamaño reducido para que no ocupen toda la pantalla */
+        font-size: 0.8rem;
+    }
+
+    .feed-container {
+        padding: 8px;
+    }
+
+    .panel-header { padding: 5px 10px; }
+    .panel-header h3 { font-size: 0.75rem; }
+
+    /* Estilo del Toast para que no tape los controles */
+    .toast-minecraft {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        font-size: 0.8rem;
     }
 }
