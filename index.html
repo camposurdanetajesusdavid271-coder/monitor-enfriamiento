@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor de Enfriamiento Predictivo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="notificacionContainer"></div>
+
+    <div class="dashboard-wrapper">
+        <aside class="panel-emergency">
+            <div class="panel-header">
+                <span class="pulse-red"></span>
+                <h3>LOGS DE CRISIS (>90°C)</h3>
+            </div>
+            <div id="listaCritica" class="feed-container"></div>
+        </aside>
+
+        <main class="panel-main">
+            <header class="main-header">
+                <h1>MONITOR DE ENFRIAMIENTO PREDICTIVO</h1>
+                </header>
+
+            <section class="control-grid">
+                <div class="card hardware-box">
+                    <div class="hardware-controls">
+                        <h3>CONFIGURACIÓN DE HARDWARE</h3>
+                        <select id="componente" class="input-gris">
+                            <optgroup label="PROCESADORES (CPUs)">
+                                <option value="0.055">CPU - Disipador Aire (Stock)</option>
+                                <option value="0.085">CPU - Torre Cobre (High-End)</option>
+                                <option value="0.125">CPU - Refrigeración Líquida (AIO)</option>
+                            </optgroup>
+                            <optgroup label="GRÁFICOS (GPUs)">
+                                <option value="0.065">GPU Core - Aire</option>
+                                <option value="0.115">GPU Core - Bloque de Agua</option>
+                                <option value="0.045">VRAM GDDR6X (Módulos)</option>
+                            </optgroup>
+                            <optgroup label="COMPONENTES PLACA">
+                                <option value="0.025">VRM - Fases de Poder</option>
+                                <option value="0.015">Chipset PCH</option>
+                            </optgroup>
+                            <optgroup label="ALMACENAMIENTO">
+                                <option value="0.022">SSD M.2 Gen4 (Stock)</option>
+                                <option value="0.058">SSD M.2 Gen5 (Activo)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="mini-chart-area">
+                        <canvas id="miniGrafico"></canvas>
+                    </div>
+                </div>
+
+                <div class="card capture-box">
+                    <h3>CAPTURA Y REPORTES</h3>
+                    <div class="input-row">
+                        <div class="field">
+                            <label>AMBIENTE (°C)</label>
+                            <input type="number" id="tempAmbiente" value="25" class="input-gris">
+                        </div>
+                        <div class="field">
+                            <label>DETECCIÓN (°C)</label>
+                            <input type="number" id="tempInicial" value="95" class="input-gris">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button onclick="ejecutarAnalisis()" class="btn-execute">EJECUTAR ANÁLISIS</button>
+                        <button onclick="generarReporte()" class="btn-report">📄 PDF</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card result-zone">
+                <div class="telemetry-display">
+                    <div class="big-number">
+                        <h2 id="numeroAnimado">00.00</h2>
+                        <small>MINUTOS PARA ESTABILIDAD</small>
+                        <p id="labelEstado"></p>
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="graficaEnfriamiento"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="panel-history">
+            <div class="panel-header"><h3>HISTORIAL DE SESIÓN</h3></div>
+            <div id="listaHistorial" class="feed-container"></div>
+        </aside>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

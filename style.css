@@ -1,0 +1,90 @@
+:root { --bg: #0f0f0f; --card-bg: #181818; --accent: #ff5f00; --border: #2a2a2a; }
+
+/* OCULTAR BARRAS DE SCROLL */
+* { scrollbar-width: none; -ms-overflow-style: none; }
+::-webkit-scrollbar { display: none; }
+
+body { margin: 0; background: var(--bg); color: #e0e0e0; font-family: 'Segoe UI', sans-serif; height: 100vh; overflow: hidden; }
+
+.dashboard-wrapper { display: grid; grid-template-columns: 300px 1fr 320px; height: 100vh; gap: 15px; padding: 15px; box-sizing: border-box; }
+
+.input-gris { background: #222 !important; border: 1px solid #333 !important; color: #bbb !important; padding: 10px; border-radius: 4px; width: 100%; outline: none; }
+
+.control-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.hardware-box { display: flex; align-items: center; gap: 15px; }
+.hardware-controls { flex: 1; }
+.mini-chart-area { width: 120px; height: 80px; background: #000; border: 1px solid #333; }
+
+.button-group { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 10px; margin-top: 10px; }
+.btn-execute { background: var(--accent); color: white; border: none; font-weight: bold; cursor: pointer; padding: 10px; }
+.btn-report { background: #444; color: white; border: 1px solid #555; cursor: pointer; }
+
+.panel-emergency, .panel-history { background: var(--card-bg); border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+.panel-emergency { border-left: 4px solid #d32f2f; }
+.panel-header { padding: 15px; background: #202020; border-bottom: 1px solid var(--border); }
+.feed-container { flex: 1; overflow-y: auto; padding: 15px; }
+.panel-main { display: flex; flex-direction: column; gap: 15px; overflow-y: auto; }
+
+.main-header h1 { font-size: 1.3rem; color: var(--accent); margin: 0; } /* Título en naranja */
+
+.card { background: var(--card-bg); padding: 15px; border: 1px solid var(--border); }
+.chart-box { width: 100%; height: 300px; margin-top: 15px; }
+
+.toast-minecraft {
+    position: fixed; top: 20px; right: 20px; background: #212121; border: 4px solid #000;
+    padding: 12px; display: flex; align-items: center; gap: 12px; z-index: 9999;
+    animation: achIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), achOut 0.5s 4.5s forwards;
+}
+@keyframes achIn { from { transform: translateX(120%); } to { transform: translateX(0); } }
+@keyframes achOut { from { transform: translateX(0); } to { transform: translateX(150%); } }
+
+/* DISEÑO RESPONSIVO PARA MÓVILES */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto; /* Permitir scroll vertical en el celular */
+    }
+
+    .dashboard-wrapper {
+        display: flex;
+        flex-direction: column; /* Apilar los paneles uno debajo del otro */
+        height: auto;
+        padding: 10px;
+    }
+
+    /* Ajustar el orden: Primero el Monitor, luego controles, luego historiales */
+    .panel-main {
+        order: 1;
+    }
+    .panel-emergency {
+        order: 2;
+        height: 300px; /* Limitar altura para que no sea infinita */
+    }
+    .panel-history {
+        order: 3;
+        height: 300px;
+    }
+
+    /* Ajustar las ventanas paralelas a una sola columna en móvil */
+    .control-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hardware-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mini-chart-area {
+        width: 100%;
+        height: 100px;
+        margin-top: 10px;
+    }
+
+    .big-number h2 {
+        font-size: 3rem; /* Hacer el número un poco más pequeño para que quepa */
+    }
+
+    .chart-box {
+        height: 250px;
+    }
+}
