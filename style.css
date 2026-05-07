@@ -38,53 +38,88 @@ body { margin: 0; background: var(--bg); color: #e0e0e0; font-family: 'Segoe UI'
 @keyframes achIn { from { transform: translateX(120%); } to { transform: translateX(0); } }
 @keyframes achOut { from { transform: translateX(0); } to { transform: translateX(150%); } }
 
-/* DISEÑO RESPONSIVO PARA MÓVILES */
+/* INTERFAZ MÓVIL OPTIMIZADA (Sustituir este bloque) */
 @media (max-width: 768px) {
     body {
-        overflow-y: auto; /* Permitir scroll vertical en el celular */
+        overflow-y: auto !important; /* Permitir scroll fluido */
+        height: auto;
     }
 
     .dashboard-wrapper {
         display: flex;
-        flex-direction: column; /* Apilar los paneles uno debajo del otro */
-        height: auto;
+        flex-direction: column;
+        gap: 12px;
         padding: 10px;
+        height: auto;
     }
 
-    /* Ajustar el orden: Primero el Monitor, luego controles, luego historiales */
-    .panel-main {
-        order: 1;
-    }
-    .panel-emergency {
-        order: 2;
-        height: 300px; /* Limitar altura para que no sea infinita */
-    }
-    .panel-history {
-        order: 3;
-        height: 300px;
+    /* Orden de importancia: 1. Monitor, 2. Controles, 3. Logs, 4. Historial */
+    .panel-main { order: 1; }
+    .capture-box { order: 2; }
+    .panel-emergency { order: 3; height: 350px; }
+    .panel-history { order: 4; height: 350px; }
+
+    /* Ajuste de tarjetas principales */
+    .card {
+        padding: 20px;
+        margin-bottom: 5px;
+        border-radius: 8px;
     }
 
-    /* Ajustar las ventanas paralelas a una sola columna en móvil */
+    /* Sección del Número y Gráfica */
+    .result-zone {
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    .big-number h2 {
+        font-size: 4rem !important; /* El tiempo es lo más importante */
+        margin: 10px 0;
+    }
+
+    .chart-box {
+        height: 220px !important;
+        margin-top: 15px;
+    }
+
+    /* Reorganizar configuración de hardware */
     .control-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Todo a una columna */
+        gap: 12px;
     }
 
     .hardware-box {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 15px;
     }
 
     .mini-chart-area {
         width: 100%;
         height: 100px;
-        margin-top: 10px;
+        border-radius: 4px;
     }
 
-    .big-number h2 {
-        font-size: 3rem; /* Hacer el número un poco más pequeño para que quepa */
+    /* Botones más grandes para dedos (Touch Friendly) */
+    .button-group {
+        grid-template-columns: 1fr; /* Botones uno sobre otro */
+        gap: 10px;
     }
 
-    .chart-box {
-        height: 250px;
+    .btn-execute, .btn-report {
+        padding: 18px; /* Más fáciles de tocar */
+        font-size: 1rem;
+        border-radius: 6px;
+    }
+
+    /* Ajuste de cabeceras */
+    .main-header h1 {
+        font-size: 1.1rem;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .panel-header h3 {
+        font-size: 0.9rem;
     }
 }
